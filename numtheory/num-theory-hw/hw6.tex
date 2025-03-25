@@ -1,0 +1,218 @@
+\documentclass[8pt]{extarticle} 
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{mathabx}
+\usepackage[bottom=0.5cm, right=1.5cm, left=1.5cm, top=1.5cm, headheight=16pt]{geometry}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\makeatletter
+\newcases{crcases}{\quad}{%
+  \hfil$\m@th\displaystyle{##}$\hfil}{\hfil$\m@th\displaystyle{##}$}{\lbrace}{.}
+\makeatother
+\usepackage{mdframed}
+\usepackage{tikzlings}
+\usepackage{tikzducks}
+\usepackage{MnSymbol}
+\usepackage{animate}
+\usepackage{physics}
+
+
+
+\title{[Number Theory] HW 6}
+\author{Connor Li, csl2192}
+\date{March 24, 2025}
+
+\newmdenv{boxedsection}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+If $x \equiv a \text{ mod }n$, then we can express $x$ as follows for some $c \in \mathbb{Z}$.
+$$
+x = nc + a
+$$
+We also know that $c$ must either be even or odd. Consider the first case, where $c$ is even and we can express $c = 2k$ for some $k \in \mathbb{Z}$. Substituting this into the expression above, we get $x = 2nk + a$, which implies that $x \equiv a \text{ mod }2n$ since $a < n < 2n$. \\
+\\
+Now, consider the case where $c$ is odd. We can express $c = 2m + 1$ for some $m \in \mathbb{Z}$. Substituting this into the expression above, we get $x = n(2m + 1) + a = 2nm + (n + a)$. Since $a < n \implies a + n < 2n$, then we know that $x \equiv a + n \text{ mod } 2n$. \\
+\\
+Thus, we have shown for any $x \in \mathbb{Z}$, if $x \equiv a \text{ mod }n$, then $x \equiv a \text{ mod }2n$ or $x \equiv a + n \text{ mod }2n$.
+
+
+
+\pagebreak
+\section*{Problem 2}
+We have the following expression, $5^{45} \text{ mod }11$. Using Fermat's Little Theorem, we have that $5^{10} \text{ mod }11 \equiv 1 \text{ mod }11$.
+\begin{align*}
+    5^{45} \text{ mod }11 &\equiv 5^5 \cdot \left(5^{10} \text{ mod }11\right)^4 \text{ mod }11\\ 
+    &\equiv 5^5 \text{ mod }11 \\
+    &\equiv (5^2 \text{ mod }11)^2 \cdot (5 \text{ mod }11) \text{ mod }11\\
+    &\equiv 9 \cdot 5 \text{ mod }11\\
+    &\equiv 1 \text{ mod }11
+\end{align*}
+This means that $5^{45} \text{ mod }11 \equiv 1 \text{ mod }11 \in [1]_{11}$.
+
+
+
+\pagebreak
+\section*{Problem 3}
+Our goal is to prove that if $\text{gcd}(a,35) = 1$, then $a^{12} \equiv 1 \text{ mod }35$. To begin, let's use Fermat's Little Theorem on each prime factor of $35$, which states that if $\text{gcd}(a,p) = 1$, then $a^{p-1} \equiv 1 \text{ mod }p$. 
+\\
+\\Consider the prime factor $5$ first. Using the theorem, we have the following.
+$$
+a^4 \equiv 1 \text{ mod }5 \implies a^{12} \equiv 1 \text{ mod }5
+$$
+Now, consider the prime factor $7$. Using the theorem, we have the following.
+$$
+a^6 \equiv 1 \text{ mod }7 \implies a^{12} \equiv 1 \text{ mod }7
+$$
+Using the Chinese Remainder Theorem and the fact that $5$ and $7$ are coprime, we can combine the two congruences above to get the following.
+$$
+a^12 \equiv 1 \text{ mod } \text{lcm}(5,7) \implies a^{12} \equiv 1 \text{ mod }35
+$$
+Thus, we have shown the original claim, if $\text{gcd}(a,35) = 1$, then $a^{12} \equiv 1 \text{ mod }35$.
+\pagebreak
+\section*{Problem 4}
+If $7 \nmid a$, then we can express $a = 7c + b$ for some $c \in \mathbb{Z}$ and for some $b \in [1,2,3,4,5,6]$. Using the binomial expansion, we can expand the term of interest $a^3$ as follows.
+\begin{align*}
+    (7c + b)^3 &= (7c)^3 + (7c)^2b + (7c)b^2 + b^3\\
+        &= 7\cdot ( \quad \cdots \quad) + b^3
+\end{align*}
+This means that the terms $a^3 + 1$ and $a^3 - 1$ are only divisible by $7$ if $b^3 + 1$ and $b^3 - 1$, respectfully, are divisible by $7$. Using the table below, for every value of $b$, I will show that one of $b^3 + 1, b^3 - 1$ is divisible by $7$.
+$$
+\begin{tabular}{| c | c | c |}
+    \hline
+    $b$ & $b^3 + 1$ & $b^3 - 1$ \\
+    \hline
+    $1$ & $\cancel{2}$ & $0$ \\
+    $2$ & $\cancel{9}$ & $7$ \\
+    $3$ & $28$ & $\cancel{26}$ \\
+    $4$ & $\cancel{65}$ & $63$ \\
+    $5$ & $126$ & $\cancel{124}$ \\
+    $6$ & $217$ & $\cancel{215}$ \\
+    \hline
+\end{tabular}
+$$
+Thus, we have shown for any $c \in \mathbb{Z}$ and $b \in [1,2,3,4,5,6]$, we have that $7 \mid (7c+b)^3 +1$ or $7 \mid (7c+b)^3 - 1$. Finally, we can conclude that if $7 \nmid a$, then $7 \mid a^3 + 1$ or $7 \mid a^3 - 1$.
+
+\pagebreak
+\section*{Problem 5}
+To show that the units digit of $a$ and $a^5$ are the same, let's first prove a theorem.\\
+\\
+\textbf{Theorem:} For any integer $a$ with a units digit $a_0$, we have that $a^5 \text{ mod 10} \equiv (a_0)^5 \text{ mod }10$. \\
+\\
+\textbf{Proof:} 
+Consider any integer $a$. We can represent $a$ in terms of its digits as follows where $a_0$ is the units place and $a$ is ``$n$ digits long''.
+$$
+a = \sum_{i=0}^n a_i \cdot 10^i
+$$
+Now, consider the term $a^5$.
+\begin{align*}
+    a^5 &= \left(\sum_{i=0}^n a_i \cdot 10^i\right)^5 \\
+    &= (a_n\cdot 10^n + a_{n-1} \cdot 10^{n-1} \cdots + a_1\cdot 10 + a_0)^5\\
+    &= 10 \cdot (\quad \cdots \quad ) + (a_0)^5
+\end{align*}
+This implies that $a^5 \text{ mod }10 \equiv (a_0)^5 \text{ mod }10$.\\
+\\
+Now, let's use this theorem to prove the original claim. Since the units digit of $a^5$ is $a^5 \text{ mod }10 \equiv (a_0)^5 \text{ mod }10$, we can show that, for every choice of $a_0$, we have $a_0 \equiv (a_0)^5 \text{ mod }10$. 
+$$
+    \begin{tabular}{| c | c | c |}
+        \hline
+        $a_0$ & $(a_0)^5$ & $(a_0)^5 \text{ mod }10$ \\
+        \hline
+        $0$ & $0$ & $0$ \\
+        $1$ & $1$ & $1$ \\
+        $2$ & $32$ & $2$ \\
+        $3$ & $243$ & $3$ \\
+        $4$ & $1024$ & $4$ \\
+        $5$ & $3125$ & $5$ \\
+        $6$ & $7776$ & $6$ \\
+        $7$ & $16807$ & $7$ \\
+        $8$ & $32768$ & $8$ \\
+        $9$ & $59049$ & $9$ \\
+        \hline
+    \end{tabular}
+$$
+The above table concludes our proof that the units digit of $a$ and $a^5$ are the same for any choice of $a \in \mathbb{Z}$.
+
+
+
+\pagebreak
+\section*{Problem 6}
+Using Wilson's Theorem, we have that $(p-1)! \equiv -1 \text{ mod }p$ if and only if $p$ is prime. We can use this theorem to show that $17$ is prime by showing that $16! \equiv -1 \text{ mod }17$.\\
+\\
+Instead of expanding $16!$, let's consider the product using modular inverses in $\mathbb{Z}_{17}$.
+\begin{align*}
+16! \text{ mod }17 &\equiv (1) \cdot \overbrace{(2 \cdot 9) \cdot (3 \cdot 6) \cdot (4 \cdot 13) \cdot (5 \cdot 7) \cdot (8 \cdot 15) \cdot (10 \cdot 12) \cdot (11 \cdot 14)}^{\text{Paired Inverses in }\mathbb{Z}_{17}} \cdot\; (16) \text{ mod }17\\
+    &= (1) \cdot (16) \text{ mod }17\\
+    &= -1 \text{ mod }17
+\end{align*}
+Thus, since we have shown that $16! \equiv -1 \text{ mod }17$, we can conclude that $17$ is prime by Wilson's Theorem.
+
+\pagebreak
+\section*{Problem 7}
+In order to find the unique solutions to $x^2 \equiv 1 \text{ mod }35$, we can use the Chinese Remainder Theorem and first find the solutions to $x^2 \equiv 1 \text{ mod }5$ and $x^2 \equiv 1 \text{ mod }7$.\\
+\\
+Consider the equation $x^2 \equiv 1 \text{ mod }5$. Let's find the solutions exhaustively.
+$$
+    \begin{tabular}{|c | c |}
+        \hline
+        $x$ & $x^2 \text{ mod }5$ \\
+        \hline
+        $0$ & $0$ \\
+        $1$ & $1$ \\
+        $2$ & $4$ \\
+        $3$ & $4$ \\
+        $4$ & $1$ \\
+        \hline
+    \end{tabular}
+$$
+Thus, the solutions to $x^2 \equiv 1 \text{ mod }5$ are $x \in [1,4]_5$.\\
+\\
+Similarly, consider the equation $x^2 \equiv 1 \text{ mod }7$.
+$$
+\begin{tabular}{| c | c |}
+    \hline
+    $x$ & $x^2 \text{ mod }7$ \\
+    \hline
+    $0$ & $0$ \\
+    $1$ & $1$ \\
+    $2$ & $4$ \\
+    $3$ & $2$ \\
+    $4$ & $2$ \\
+    $5$ & $4$ \\
+    $6$ & $1$ \\
+    \hline
+\end{tabular}
+$$
+Thus, the solutions to $x^2 \equiv 1 \text{ mod }7$ are $x \in [1,6]_7$.\\
+\\
+By the Chinese Remainder Theorem, since $5$ and $7$ are corpime, then every pair $(a \text{ mod }5, b \text{ mod }7)$ corresponds to exactly one solution $x \text{ mod } 35$. This guarantees exactly $4$ unique solutions, listed out in tabular form.
+$$
+\begin{tabular}{|c | c | c |}
+    \hline
+    $a \text{ mod } 5$ & $b \text{ mod } 7$ & $x \text{ mod } 35$ \\
+    \hline
+    $1$ & $1$ & $1$ \\
+    $1$ & $6$ & $6$ \\
+    $4$ & $1$ & $29$ \\
+    $4$ & $6$ & $34$ \\
+    \hline
+\end{tabular}
+$$
+Finally, we can conclude that there are $4$ solutions to $x^2 \equiv 1 \text{ mod }35$ in the form of $\pm 1, \pm 6 \text{ mod }35$.
+\end{document}
