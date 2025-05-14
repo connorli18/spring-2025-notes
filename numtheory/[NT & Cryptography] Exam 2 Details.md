@@ -60,7 +60,7 @@ where for all $i$:
 
 **Lemma:** When $\text{gcd}(a,n) \mid b$, the number of solutions to $ax \equiv b \text{ mod }n$ is $\text{gcd}(a,n)$.
 
-**Theorem:** Let $n_1, n_2, \dots, n_t$ such that $\text{gcd}(n_i, n_j) = 1$ for all $i \neq j$. Then
+**Chinese Remainder Theorem:** Let $n_1, n_2, \dots, n_t$ be positive integers such that $\text{gcd}(n_i, n_j) = 1$ for all $i \neq j$. Then
 $$
 \begin{align*}
 	x &\equiv a_1 \text{ mod }n_1\\
@@ -112,7 +112,7 @@ If you have a system like in the CRT where respective $n_i$ are comprime. Then, 
 - $N_i = \frac{N}{n_i}$ 
 - Find modular inverse $m_i$ such that $m_i \cdot N_i \equiv 1 \text{ mod }n_i$
 
-Solution to the system is given by
+  
 $$
 x = \sum_{i=0}^t a_iN_im_i \text{ mod } N
 $$
